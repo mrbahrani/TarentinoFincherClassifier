@@ -1,0 +1,1 @@
+This part removes the distractive elements of a subtitle and turn the data into pure dialogue.
