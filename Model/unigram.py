@@ -85,6 +85,10 @@ class UnigramModel:
         return sum_of_logs**(1/len(sentence_words))
 
 
+    def generate_sentence(self):
+
+
+
 if __name__ == "__main__":
     u = UnigramModel("in.1gram", "te_test")
     u.unk_support = False

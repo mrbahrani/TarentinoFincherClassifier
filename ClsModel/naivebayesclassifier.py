@@ -66,9 +66,11 @@ if __name__ == "__main__":
     for line in t:
         x = nb.get_log_possibility(line)
         if x[0]>x[1]:
-            print("Tarentino")
+            #print("Tarentino")
             cnt += 1
-        else: print("Fincher")
+        else:
+            pass
+        #print("Fincher")
         a += 1
     print(cnt/a)
 
@@ -78,8 +80,9 @@ if __name__ == "__main__":
     for line in t:
         x = nb.get_log_possibility(line)
         if x[0]<x[1]:
-            print("Tarentino")
+            #print("Tarentino")
             cnt += 1
-        else: print("Fincher")
+        else: #print("Fincher")
+            pass
         a += 1
     print(cnt/a)

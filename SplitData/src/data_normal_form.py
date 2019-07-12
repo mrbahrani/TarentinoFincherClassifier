@@ -7,6 +7,7 @@ if __name__ == "__main__":
     q = sent_tokenize(ss)
     l1o = open("sentence_label1.txt", "w")
     for s in q:
+        s = s.replace(",", "")
         l1o.write(s[:-1:1]+"\n")
     l1o.close()
 

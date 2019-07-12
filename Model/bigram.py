@@ -1,6 +1,6 @@
 from Model.unigram import UnigramModel
 import math
-
+import numpy as np
 
 class BigramModel:
     def __init__(self,train_file,test_file):
@@ -79,8 +79,34 @@ class BigramModel:
         print(sum_of_logs)
         return sum_of_logs**(1/len(sentence_word))
 
+    def genrate_sentence(self):
+        unkless_model = dict()
+        for item in self.model_dict.keys():
+            if "<unk>" not in item:
+                unkless_model[item] = self.model_dict[item]
+
+        last_word = "<s>"
+        max_length = 10
+        sentence_length = 0
+        sentence = "<s> "
+        while (last_word != "</s>") and (sentence_length < max_length):
+            w = list()
+            p = list()
+            for item in unkless_model.keys():
+                if item[0] == last_word:
+                    w.append(item[1])
+                    p.append(unkless_model[item])
+            ch = np.random.choice(w, 1, p)
+            print("ch", ch)
+            sentence += ch[0] + " "
+            last_word = ch[0]
+            print(sentence)
+
+        return sentence
+
 
 if __name__ == "__main__":
     b = BigramModel("example.txt", None)
     b.train()
     print(b.get_perplexity("You sound like"))
+    b.genrate_sentence()

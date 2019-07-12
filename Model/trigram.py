@@ -1,6 +1,7 @@
 from Model.unigram import UnigramModel
 from Model.bigram import BigramModel
 import math
+import numpy as np
 
 
 class TrigramModel:
@@ -82,8 +83,45 @@ class TrigramModel:
             word2 = word3
         return sum_of_logs**(1/len(sentence_word))
 
+    def genrate_sentence(self):
+        unkless_model = dict()
+        for item in self.model_dict.keys():
+            if "<unk>" not in item:
+                unkless_model[item] = self.model_dict[item]
+
+        last_words = ["<s>", ""]
+        max_length = 10
+        sentence_length = 0
+        sentence = "<s> "
+        w = list()
+        p = list()
+        for item in unkless_model.keys():
+            if item[0] == "<s>":
+                w.append((item[1] + "|" + item[2]))
+                p.append(unkless_model[item])
+        chs = np.random.choice(w, 1, p)
+        last_words = chs[0].split("|")
+        sentence += last_words[0] + " " + last_words[1] + " "
+        print("sentence before while...", sentence)
+        while (last_words[1] != "</s>") and (sentence_length < max_length):
+            print("last words", last_words)
+            w = list()
+            p = list()
+            for item in unkless_model.keys():
+                if [item[0], item[1]] == last_words:
+                    w.append(item[2])
+                    print("item", item)
+                    p.append(unkless_model[item])
+            ch = np.random.choice(w, 1, p)
+            sentence += ch[0] + " "
+            print(sentence)
+            last_words.pop(0)
+            last_words.append(ch[0])
+
+        return sentence
+
 
 if __name__ == "__main__":
     tr = TrigramModel("example.txt", None)
     tr.train()
-    print(tr.get_perplexity("You sound like a"))
+    tr.genrate_sentence()
