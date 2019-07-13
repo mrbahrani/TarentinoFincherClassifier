@@ -1,4 +1,4 @@
-from Model.unigram import UnigramModel
+from Model.src.unigram import UnigramModel
 import math
 
 class NBClass:

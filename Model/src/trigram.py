@@ -1,5 +1,5 @@
-from Model.unigram import UnigramModel
-from Model.bigram import BigramModel
+from Model.src.unigram import UnigramModel
+from Model.src.bigram import BigramModel
 import math
 import numpy as np
 
@@ -122,6 +122,6 @@ class TrigramModel:
 
 
 if __name__ == "__main__":
-    tr = TrigramModel("example.txt", None)
+    tr = TrigramModel("sentence_label2.txt", None)
     tr.train()
     tr.genrate_sentence()

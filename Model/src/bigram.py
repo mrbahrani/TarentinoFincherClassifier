@@ -1,4 +1,4 @@
-from Model.unigram import UnigramModel
+from Model.src.unigram import UnigramModel
 import math
 import numpy as np
 
@@ -106,7 +106,6 @@ class BigramModel:
 
 
 if __name__ == "__main__":
-    b = BigramModel("example.txt", None)
+    b = BigramModel("sentence_label1.txt", None)
     b.train()
-    print(b.get_perplexity("You sound like"))
     b.genrate_sentence()
